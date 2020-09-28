@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>js file reader demo</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <!-- vuetify -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <!-- vuetify -->
+
+  <!-- element-ui -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <!-- element-ui -->
+
+  <!-- iview -->
+  <link rel="stylesheet" href="https://unpkg.com/view-design/dist/styles/iview.css">
+  <script src="https://unpkg.com/view-design/dist/iview.min.js"></script>
+  <!-- iview -->
+  <style>
+    body,
+    #app,
+    .section {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    h1 {
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+    h2 {
+      color: #515a6e !important;
+      margin-bottom: 20px;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .nav {
+      margin-bottom: 20px;
+    }
+    .nav .item {
+      color: #666;
+      margin: 0 10px 20px;
+    }
+    .nav .cur {
+      color: #000;
+      font-weight: bold;
+    }
+    .label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .text {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 60px;
+      font-size: 14px;
+      margin-right: 20px;
+    }
+    .input {
+      display: flex;
+      align-items: center;
+      width: 240px;
+      font-size: 14px;
+      box-sizing: border-box;
+      padding: 0 10px;
+    }
+    .button {
+      padding: 5px 20px;
+      cursor: pointer;
+    }
+    .v-application--wrap {
+      min-height: 1px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hello App!</h1>
+
+  <!-- 原生 -->
+  <div>
+    <section class="section">
+      <h2>原生input</h2>
+      <label class="label">
+        <span class="text">选择图片</span>
+        <input
+          id="nativeUpload"
+          class="input"
+          type="file"
+          accept="image/*" 
+          multiple
+          onchange="nativeGetFileInfo(this)"
+        >
+      </label>
+    </section>
+  </div>
+  <!-- 原生 -->
+
+  <!-- vue -->
+  <div id="vue-app">
+    <section class="section">
+      <h2>虚拟input</h2>
+      <label class="label">
+        <span class="text">选择图片</span>
+        <input
+          class="input"
+          type="file"
+          accept="image/*" 
+          multiple
+          @change="getFileInfo"
+        >
+      </label>
+    </section>
+  </div>
+  <!-- vue -->
+
+  <!-- vuetify -->
+  <div id="vuetify-app">
+    <v-app>
+      <section class="section">
+        <h2>vuetify的上传组件</h2>
+        <template>
+          <v-file-input
+            class="input"
+            accept="image/*" 
+            multiple
+            label="选择文件"
+            @change="getFileInfo"
+          ></v-file-input>
+        </template>
+      </section>
+    </v-app>
+  </div>
+  <!-- vuetify -->
+
+  <!-- iview -->
+  <div id="iview-app">
+    <section class="section">
+      <h2>iview的上传组件</h2>
+      <template>
+        <Upload
+          accept="image/*" 
+          multiple
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :before-upload="pushFile"
+        >
+          <Button type="primary">选择图片</Button>
+        </Upload>
+      </template>    
+      <Button type="primary" @click="getFileInfo">获取文件信息</Button>
+    </section>
+  </div>
+  <!-- iview -->
+
+  <!-- element -->
+  <div id="element-app">
+    <section class="section">
+      <h2>element-ui的上传组件</h2>
+      <label class="label">
+        <span class="text">选择图片</span>
+        <el-upload
+          accept="image/*" 
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :on-change="pushFile"
+          :auto-upload="false"
+          :show-file-list="false"
+          multiple
+        >
+          <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+          <el-button style="margin-left: 10px;" size="small" type="success" @click="getFileInfo">获取文件信息</el-button>
+        </el-upload>
+      </label>
+    </section>
+  </div>
+  <!-- element -->
+
+  <script src="../dist/js-file-reader.js"></script>
+  <script src="js/main.js"></script>
+  
+</body>
+</html>
