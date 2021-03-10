@@ -1,6 +1,6 @@
 /** 
  * name: js-file-reader
- * version: v1.0.0
+ * version: v1.1.0
  * author: chengpeiquan
  */
  (function (global, factory) {
@@ -162,12 +162,10 @@
         };
       }
     }
-    function __spreadArrays() {
-      for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    function __spreadArray(to, from) {
+      for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
 
-      for (var r = Array(s), k = 0, i = 0; i < il; i++) for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) r[k] = a[j];
-
-      return r;
+      return to;
     }
 
     var readFile = function (file, readType) {
@@ -199,9 +197,9 @@
                 resolve([]);
                 return false;
             }
-            var FILE_LIST = Array.isArray(fileData) ? __spreadArrays(fileData) : [fileData];
+            var FILE_LIST = Array.isArray(fileData) ? __spreadArray([], fileData) : [fileData];
             var startReadFile = function () { return __awaiter(void 0, void 0, void 0, function () {
-                var RESULT, i, RESULT_ITEM, BASE_64, BUFFER, BLOB;
+                var RESULT, i, RESULT_ITEM, FILE_TYPE, BASE_64, BUFFER, BLOB;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -214,6 +212,7 @@
                                 base64: null,
                                 blob: null
                             };
+                            FILE_TYPE = FILE_LIST[i].type || '';
                             return [4, readFile(FILE_LIST[i], 'base64')];
                         case 2:
                             BASE_64 = _a.sent();
@@ -221,7 +220,9 @@
                             return [4, readFile(FILE_LIST[i], 'blob')];
                         case 3:
                             BUFFER = _a.sent();
-                            BLOB = new Blob([BUFFER]);
+                            BLOB = new Blob([BUFFER], {
+                                type: FILE_TYPE
+                            });
                             RESULT_ITEM['blob'] = BLOB;
                             RESULT.push(RESULT_ITEM);
                             _a.label = 4;

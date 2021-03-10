@@ -1,8 +1,9 @@
 {
   "name": "js-file-reader",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A very simple small tool that can read files from the input box and convert them to the required format.",
   "main": "dist/js-file-reader.min.js",
+  "types": "js-file-reader.d.ts",
   "scripts": {
     "build": "rollup -c rollup.config.ts"
   },

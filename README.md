@@ -62,7 +62,7 @@ import readFile from 'js-file-reader'
 如果是npm安装的，需要挂载到诸如Vue的原型上全局使用。
 
 ```js
-// main.js
+// main.js in Vue 2.x
 Vue.prototype.$readFile = readFile;
 ```
 
